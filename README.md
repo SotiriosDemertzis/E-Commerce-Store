@@ -4,7 +4,7 @@ A sophisticated, full-featured e-commerce application built with React, showcasi
 
 ## 🌟 Live Demo
 
-[View Live Demo](https://your-ecommerce-demo.netlify.app/)
+[View Live Demo](https://e-commerce-store-1.netlify.app/)
 
 ## ✨ Features
 
