@@ -1,3 +1,14 @@
+/**
+ * @fileoverview Toast notification utilities and configuration
+ * Provides toast type definitions with icons, styling, and reducer logic
+ * Used by the ToastNotification component system
+ */
+
+/**
+ * Toast type configuration object containing styling and icons for different toast types
+ * Each type includes icon JSX, CSS classes for styling, and icon-specific classes
+ * @type {Object<string, Object>}
+ */
 export const toastTypes = {
   success: {
     icon: (
@@ -64,6 +75,15 @@ export const toastTypes = {
   }
 };
 
+/**
+ * Reducer function for managing toast notification state
+ * Handles adding, removing, and clearing toast notifications
+ * @param {Array} state - Current array of toast notifications
+ * @param {Object} action - Action object with type and payload
+ * @param {string} action.type - Action type (ADD_TOAST, REMOVE_TOAST, CLEAR_TOASTS)
+ * @param {*} action.payload - Action payload data
+ * @returns {Array} New toast notifications array
+ */
 export const toastReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TOAST':

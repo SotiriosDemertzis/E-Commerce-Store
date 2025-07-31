@@ -1,7 +1,16 @@
+/**
+ * @fileoverview CartSidebar component providing a slide-out shopping cart interface.
+ * Features cart item management, quantity updates, total calculation, and checkout actions.
+ * Includes responsive design with backdrop overlay and smooth animations.
+ */
+
 import { useCartActions } from "../context/ShopActions";
 import { useCartState } from "../context/ShopSelectors";
 
-
+/**
+ * CartSidebar component for displaying and managing shopping cart items
+ * @returns {JSX.Element|null} The cart sidebar with items, totals, and actions, or null if closed
+ */
 export default function CartSidebar (){
 
   const {cart, cartTotal, cartIsEmpty, isCartOpen} = useCartState();

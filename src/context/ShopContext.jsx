@@ -1,15 +1,33 @@
+/**
+ * @fileoverview Shop context provider and hooks for global state management
+ * Implements React Context API with useReducer for centralized state management
+ * Includes localStorage persistence for cart and wishlist data
+ */
+
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useReducer, useContext, useEffect } from 'react';
 import { ACTION_TYPES , initialState} from './ShopTypes';
 import { ShopReducer } from './ShopReducer';
 
-
-// Create separate contexts for state and dispatch
+/**
+ * Context for shop state data (read-only)
+ * @type {React.Context}
+ */
 const ShopContext = createContext(null);
+
+/**
+ * Context for shop dispatch function (actions)
+ * @type {React.Context}
+ */
 const ShopDispatchContext = createContext(null);
 
-
-// Provider component
+/**
+ * Provider component that wraps the application with shop state management
+ * Handles localStorage persistence for cart and wishlist data
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Child components to receive context
+ * @returns {JSX.Element} Provider component with nested contexts
+ */
 export function ShopProvider({children}) {
     const [state, dispatch] = useReducer(ShopReducer, initialState);
     console.log(state);
@@ -57,7 +75,12 @@ export function ShopProvider({children}) {
     );
 }
 
-// Basic context hoooks with error handling
+/**
+ * Hook to access shop state from context
+ * Provides read-only access to the entire shop state
+ * @returns {Object} Current shop state
+ * @throws {Error} When used outside of ShopProvider
+ */
 export function useShop() {
     const context = useContext(ShopContext);
     if(!context) {
@@ -66,6 +89,12 @@ export function useShop() {
     return context;
 }
 
+/**
+ * Hook to access shop dispatch function from context
+ * Provides access to dispatch actions for state mutations
+ * @returns {Function} Dispatch function for shop actions
+ * @throws {Error} When used outside of ShopProvider
+ */
 export function useShopDispatch() {
     const context = useContext(ShopDispatchContext);
     if(!context){

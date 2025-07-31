@@ -1,6 +1,16 @@
-// Loading States Component
-// Provides consistent loading states throughout the application
+/**
+ * @fileoverview Loading states and UI components for consistent loading experiences.
+ * Provides spinners, skeleton loaders, error states, and empty states with customizable
+ * sizes, colors, and layouts. Includes grid and list skeleton variants for different views.
+ */
 
+/**
+ * Loading spinner component with customizable size and color
+ * @param {Object} props - The component props
+ * @param {string} [props.size='md'] - Spinner size (sm, md, lg, xl)
+ * @param {string} [props.color='primary'] - Spinner color theme (primary, secondary, white, gray)
+ * @returns {JSX.Element} The loading spinner component
+ */
 export function LoadingSpinner({ size = 'md', color = 'primary' }) {
   const sizeClasses = {
     sm: 'w-4 h-4',
@@ -43,6 +53,14 @@ export function LoadingSpinner({ size = 'md', color = 'primary' }) {
   );
 }
 
+/**
+ * Loading button component with integrated spinner and disabled state
+ * @param {Object} props - The component props
+ * @param {React.ReactNode} props.children - Button content
+ * @param {boolean} props.isLoading - Whether the button is in loading state
+ * @param {boolean} props.disabled - Whether the button is disabled
+ * @returns {JSX.Element} The loading button component
+ */
 export function LoadingButton({ children, isLoading, disabled, ...props }) {
   return (
     <button 
@@ -58,6 +76,10 @@ export function LoadingButton({ children, isLoading, disabled, ...props }) {
   );
 }
 
+/**
+ * Skeleton loader for product cards in grid view
+ * @returns {JSX.Element} The product card skeleton loader
+ */
 export function ProductCardSkeleton() {
   return (
     <div className="card fade-in overflow-hidden">
@@ -99,6 +121,10 @@ export function ProductCardSkeleton() {
   );
 }
 
+/**
+ * Skeleton loader for product items in list view
+ * @returns {JSX.Element} The product list item skeleton loader
+ */
 export function ProductListSkeleton() {
   return (
     <div className="card fade-in">
@@ -137,6 +163,12 @@ export function ProductListSkeleton() {
   );
 }
 
+/**
+ * Grid of product card skeletons for loading state
+ * @param {Object} props - The component props
+ * @param {number} [props.count=8] - Number of skeleton cards to display
+ * @returns {JSX.Element} The loading grid with skeleton cards
+ */
 export function LoadingGrid({ count = 8 }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -147,6 +179,12 @@ export function LoadingGrid({ count = 8 }) {
   );
 }
 
+/**
+ * List of product item skeletons for loading state
+ * @param {Object} props - The component props
+ * @param {number} [props.count=6] - Number of skeleton items to display
+ * @returns {JSX.Element} The loading list with skeleton items
+ */
 export function LoadingList({ count = 6 }) {
   return (
     <div className="grid grid-cols-1 gap-6">
@@ -157,6 +195,10 @@ export function LoadingList({ count = 6 }) {
   );
 }
 
+/**
+ * Full-page loading overlay with backdrop and spinner
+ * @returns {JSX.Element} The page loading overlay component
+ */
 export function PageLoadingOverlay() {
   return (
     <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center">
@@ -168,6 +210,13 @@ export function PageLoadingOverlay() {
   );
 }
 
+/**
+ * Error fallback component for React error boundaries
+ * @param {Object} props - The component props
+ * @param {Error} props.error - The error object that was caught
+ * @param {Function} props.resetError - Function to reset the error boundary
+ * @returns {JSX.Element} The error boundary fallback UI
+ */
 export function ErrorBoundaryFallback({ error, resetError }) {
   return (
     <div className="min-h-96 flex items-center justify-center p-8">
@@ -208,6 +257,12 @@ export function ErrorBoundaryFallback({ error, resetError }) {
   );
 }
 
+/**
+ * Network error state component with retry functionality
+ * @param {Object} props - The component props
+ * @param {Function} props.onRetry - Function to call when retry is clicked
+ * @returns {JSX.Element} The network error state component
+ */
 export function NetworkErrorState({ onRetry }) {
   return (
     <div className="text-center py-16">
@@ -233,6 +288,15 @@ export function NetworkErrorState({ onRetry }) {
   );
 }
 
+/**
+ * Generic empty state component with customizable content
+ * @param {Object} props - The component props
+ * @param {React.ReactNode} [props.icon] - Optional icon to display
+ * @param {string} props.title - Title text for the empty state
+ * @param {string} props.description - Description text for the empty state
+ * @param {React.ReactNode} [props.action] - Optional action button or element
+ * @returns {JSX.Element} The empty state component
+ */
 export function EmptyState({ 
   icon, 
   title, 

@@ -1,7 +1,19 @@
+/**
+ * @fileoverview Shop state reducer - handles all state mutations for the e-commerce application
+ * Implements immutable state updates following Redux patterns
+ */
+
 import { ACTION_TYPES} from './ShopTypes';
 
-
-// REDUCER FUNCTION
+/**
+ * Main reducer function for shop state management
+ * Handles all application state mutations in an immutable way
+ * @param {Object} state - Current application state
+ * @param {Object} action - Action object with type and payload
+ * @param {string} action.type - Action type from ACTION_TYPES
+ * @param {*} action.payload - Action payload data
+ * @returns {Object} New state object
+ */
 export function ShopReducer(state,action) {
     switch (action.type) {
         case ACTION_TYPES.SET_PRODUCTS:

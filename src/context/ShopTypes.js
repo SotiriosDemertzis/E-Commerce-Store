@@ -1,6 +1,14 @@
+/**
+ * @fileoverview Shop application action types, constants, and initial state definitions
+ * Centralizes all action type constants and application state structure for consistency
+ */
+
 import { PRODUCTS } from '../data/products';
 
-// Action Types
+/**
+ * Action type constants for the shop reducer
+ * Organized by feature area for better maintainability
+ */
 export const ACTION_TYPES = {
   // Product actions
   SET_PRODUCTS: 'SET_PRODUCTS',
@@ -25,9 +33,10 @@ export const ACTION_TYPES = {
   REMOVE_FROM_WISHLIST: 'REMOVE_FROM_WISHLIST'
 };
 
-// Categories are dynamically computed based on products
-
-// Sort Options
+/**
+ * Sort option constants for product ordering
+ * Defines available sorting methods for the product catalog
+ */
 export const SORT_TYPES = {
   NAME: 'name',
   PRICE_LOW: 'price-low',
@@ -37,7 +46,11 @@ export const SORT_TYPES = {
 };
 
 
-// INITIAL STATE
+/**
+ * Initial application state
+ * Defines the complete state structure for the e-commerce application
+ * @type {Object}
+ */
 export const initialState = {
   // Product state
   products: PRODUCTS,

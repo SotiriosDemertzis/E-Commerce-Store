@@ -1,13 +1,33 @@
+/**
+ * @fileoverview Toast notification system with multiple types, animations, and portal rendering.
+ * Provides Toast component, ToastContainer, ToastProvider context, and toast management utilities.
+ * Features auto-dismiss, manual close, and smooth enter/exit animations.
+ */
+
 import { useState, useEffect, createContext, useReducer, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { toastTypes, toastReducer } from '../utils/toastUtils.jsx';
 
+/**
+ * Individual toast notification component with animations and auto-dismiss
+ * @param {Object} props - The component props
+ * @param {string} props.id - Unique identifier for the toast
+ * @param {string} [props.type='info'] - Toast type (info, success, warning, error)
+ * @param {string} props.title - Toast title text
+ * @param {string} props.message - Toast message text
+ * @param {number} [props.duration=2500] - Auto-dismiss duration in milliseconds
+ * @param {Function} props.onClose - Function to call when toast closes
+ * @returns {JSX.Element} The toast notification element
+ */
 export function Toast({ id, type = 'info', title, message, duration = 2500, onClose }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
 
   const toastConfig = toastTypes[type] || toastTypes.info;
 
+  /**
+   * Handles toast close with exit animation
+   */
   const handleClose = useCallback(() => {
     setIsLeaving(true);
     setTimeout(() => {
@@ -74,6 +94,13 @@ export function Toast({ id, type = 'info', title, message, duration = 2500, onCl
   );
 }
 
+/**
+ * Container component for rendering multiple toasts using React portal
+ * @param {Object} props - The component props
+ * @param {Array} props.toasts - Array of toast objects to display
+ * @param {Function} props.onClose - Function to call when a toast closes
+ * @returns {JSX.Element|null} The toast container portal, or null if no toasts
+ */
 export function ToastContainer({ toasts, onClose }) {
   if (!toasts || toasts.length === 0) return null;
 
@@ -94,17 +121,34 @@ export function ToastContainer({ toasts, onClose }) {
 // Toast context and hook
 const ToastContext = createContext();
 
+/**
+ * Toast provider component that manages toast state and provides context
+ * @param {Object} props - The component props
+ * @param {React.ReactNode} props.children - Child components to wrap with toast context
+ * @returns {JSX.Element} The provider component with toast context and container
+ */
 export function ToastProvider({ children }) {
   const [toasts, dispatch] = useReducer(toastReducer, []);
 
+  /**
+   * Adds a new toast to the display queue
+   * @param {Object} toast - The toast object to add
+   */
   const addToast = (toast) => {
     dispatch({ type: 'ADD_TOAST', payload: toast });
   };
 
+  /**
+   * Removes a toast by ID
+   * @param {string} id - The ID of the toast to remove
+   */
   const removeToast = (id) => {
     dispatch({ type: 'REMOVE_TOAST', payload: id });
   };
 
+  /**
+   * Clears all toasts from the display
+   */
   const clearToasts = () => {
     dispatch({ type: 'CLEAR_TOASTS' });
   };

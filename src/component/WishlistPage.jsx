@@ -1,8 +1,18 @@
+/**
+ * @fileoverview WishlistPage component displaying user's saved products with management actions.
+ * Features product grid layout, image loading states, move to cart functionality, remove actions,
+ * and empty state handling. Includes responsive design and comprehensive product information display.
+ */
+
 import { useState } from 'react';
 import { useWishlist } from '../context/ShopSelectors';
 import { useWishlistActions, useCartActions } from '../context/ShopActions';
 import { useToast } from '../hooks/useToast';
 
+/**
+ * WishlistPage component for displaying and managing wishlist items
+ * @returns {JSX.Element} The wishlist page with products or empty state
+ */
 export default function WishlistPage() {
   const { wishlist } = useWishlist();
   const { removeFromWishlist } = useWishlistActions();
@@ -10,16 +20,28 @@ export default function WishlistPage() {
   const { toast } = useToast();
   const [imageLoadStates, setImageLoadStates] = useState({});
 
+  /**
+   * Handles image load completion for a specific product
+   * @param {string|number} productId - The ID of the product whose image loaded
+   */
   const handleImageLoad = (productId) => {
     setImageLoadStates(prev => ({ ...prev, [productId]: true }));
   };
 
+  /**
+   * Moves a product from wishlist to cart and shows confirmation toast
+   * @param {Object} product - The product object to move to cart
+   */
   const handleMoveToCart = (product) => {
     addToCart(product);
     removeFromWishlist(product.id);
     toast.cart('Moved to Cart', `${product.name} has been moved from wishlist to cart`);
   };
 
+  /**
+   * Removes a product from wishlist and shows confirmation toast
+   * @param {Object} product - The product object to remove from wishlist
+   */
   const handleRemoveFromWishlist = (product) => {
     removeFromWishlist(product.id);
     toast.wishlistRemove('Removed from Wishlist', `${product.name} has been removed from your wishlist`);

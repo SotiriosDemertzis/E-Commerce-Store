@@ -1,8 +1,17 @@
+/**
+ * @fileoverview Action hooks for shop state management
+ * Provides hooks that return action dispatcher functions for various shop operations
+ * Uses useMemo for performance optimization to prevent unnecessary re-renders
+ */
+
 import { useMemo } from "react";
 import { useShopDispatch } from "./ShopContext.jsx";
 import { ACTION_TYPES } from "./ShopTypes.js";
 
-// Individual hooks that are actually used
+/**
+ * Hook that returns a function to toggle the cart sidebar visibility
+ * @returns {Function} Function to toggle cart sidebar state
+ */
 export function useToggleCartSidebar() {
     const dispatch = useShopDispatch();
 
@@ -14,6 +23,10 @@ export function useToggleCartSidebar() {
     };
 }
 
+/**
+ * Hook that returns a function to add products to the cart
+ * @returns {Function} Function that accepts a product and adds it to cart
+ */
 export function useAddToCart() {
     const dispatch = useShopDispatch();
 
@@ -25,7 +38,16 @@ export function useAddToCart() {
     };
 }
 
-// Combined action hooks used by components
+/**
+ * Combined hook that returns all cart-related action functions
+ * Memoized for performance - only recreates when dispatch changes
+ * @returns {Object} Object containing all cart action functions
+ * @returns {Function} returns.addToCart - Add product to cart
+ * @returns {Function} returns.removeFromCart - Remove product from cart
+ * @returns {Function} returns.updateQuantity - Update product quantity
+ * @returns {Function} returns.clearCart - Clear all items from cart
+ * @returns {Function} returns.toggleCartSidebar - Toggle cart sidebar visibility
+ */
 export function useCartActions() {
     const dispatch = useShopDispatch();
     
@@ -41,6 +63,14 @@ export function useCartActions() {
     }), [dispatch]);
 }
 
+/**
+ * Combined hook that returns all product filter action functions
+ * @returns {Object} Object containing all product filter action functions
+ * @returns {Function} returns.setCategoryFilter - Set category filter
+ * @returns {Function} returns.setSearchTerm - Set search term
+ * @returns {Function} returns.setSortBy - Set sort criteria
+ * @returns {Function} returns.setViewMode - Set view mode (grid/list)
+ */
 export function useProductFilterActions() {
     const dispatch = useShopDispatch();
     
@@ -52,6 +82,12 @@ export function useProductFilterActions() {
     }), [dispatch]);
 }
 
+/**
+ * Hook that returns product modal action functions
+ * @returns {Object} Object containing modal action functions
+ * @returns {Function} returns.openProductModal - Open modal with product
+ * @returns {Function} returns.closeProductModal - Close product modal
+ */
 export function useProductModal() {
     const dispatch = useShopDispatch();
     
@@ -61,6 +97,12 @@ export function useProductModal() {
     }), [dispatch]);
 }
 
+/**
+ * Hook that returns wishlist action functions
+ * @returns {Object} Object containing wishlist action functions
+ * @returns {Function} returns.addToWishlist - Add product to wishlist
+ * @returns {Function} returns.removeFromWishlist - Remove product from wishlist
+ */
 export function useWishlistActions() {
     const dispatch = useShopDispatch();
     

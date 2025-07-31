@@ -28,6 +28,7 @@ A sophisticated, full-featured e-commerce application built with React, showcasi
 - **Custom Hooks**: Reusable logic for cart, wishlist, and filters
 - **Local Storage**: Persistent cart and wishlist data
 - **Component Architecture**: Modular, maintainable code structure
+- **JSDoc Documentation**: Comprehensive code documentation for all components
 - **TypeScript Ready**: Well-structured for easy TypeScript migration
 
 ## 🛠️ Technologies & Tools Used
@@ -140,7 +141,7 @@ e-commerce-store/
 - ✅ **Code Organization**: Clean architecture and separation of concerns
 - ✅ **Development Tools**: ESLint, Vite, and modern build processes
 - ✅ **Version Control**: Git best practices and commit conventions
-- ✅ **Documentation**: Comprehensive README and code comments
+- ✅ **Documentation**: Comprehensive README and complete JSDoc documentation
 
 ## 🎨 Design Features
 
@@ -155,6 +156,28 @@ e-commerce-store/
 - **Breakpoint Strategy**: Responsive components at multiple screen sizes
 - **Flexible Layouts**: Grid and list views for different preferences
 - **Touch-Friendly**: Properly sized touch targets and gestures
+
+## 📚 Code Documentation
+
+This project features comprehensive JSDoc documentation throughout the codebase:
+
+### Documentation Coverage
+- **Complete JSDoc Comments**: All components, hooks, utilities, and functions are documented
+- **Type Definitions**: Parameter types, return types, and object properties clearly defined
+- **Usage Examples**: Function descriptions include usage context and behavior
+- **File Overviews**: Each file includes @fileoverview describing its purpose and functionality
+
+### Documentation Structure
+- **Components**: All React components documented with prop types and return values
+- **Context System**: State management hooks and actions fully documented
+- **Utilities**: Helper functions and error handling utilities documented
+- **Data Structures**: Product data and type definitions documented
+
+### Benefits
+- **Developer Experience**: Easy onboarding and code understanding
+- **Maintainability**: Clear function contracts and component interfaces
+- **IDE Support**: Enhanced autocomplete and inline documentation
+- **Future TypeScript Migration**: Ready for seamless TypeScript conversion
 
 ## 🔧 Advanced Features
 
@@ -188,6 +211,39 @@ e-commerce-store/
 - **Accessible Actions**: Wishlist and cart buttons on all screen sizes
 - **Consistent Experience**: Feature parity between desktop and mobile
 - **Touch Gestures**: Natural mobile interaction patterns
+
+## 👨‍💻 Development Guide
+
+### Code Architecture
+The project follows a modular architecture with clear separation of concerns:
+
+- **`src/component/`** - Reusable UI components with full JSDoc documentation
+- **`src/context/`** - Global state management using React Context + useReducer
+- **`src/hooks/`** - Custom hooks for reusable logic
+- **`src/utils/`** - Utility functions and helpers
+- **`src/data/`** - Static data and mock APIs
+
+### Key Development Patterns
+- **Component Composition**: Small, focused components that compose together
+- **Custom Hooks**: Logic extraction for reusability and testing
+- **Error Boundaries**: Graceful error handling at component boundaries
+- **Performance Optimization**: Memoization and optimized re-renders
+
+### Understanding the State System
+The application uses a sophisticated state management system:
+
+1. **ShopContext** - Provides global state using useReducer pattern
+2. **Action Hooks** - Convenient hooks for dispatching actions
+3. **Selector Hooks** - Optimized hooks for accessing specific state slices
+4. **Persistence** - Automatic localStorage sync for cart and wishlist
+
+### Working with Components
+All components are fully documented with JSDoc. Key components include:
+
+- **ProductCard** - Displays products in grid/list view with interactions
+- **ProductGrid** - Manages product display and view modes
+- **CartSidebar** - Sliding cart interface with quantity management
+- **ProductModal** - Detailed product view with image gallery
 
 ## 🚀 Build & Deployment
 
@@ -241,7 +297,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - **React Team** - For the amazing framework and documentation
 - **Tailwind CSS** - For the utility-first CSS framework
-- **Claude AI** - For development assistance and architecture guidance
 - **Open Source Community** - For inspiration and learning resources
 
 ---

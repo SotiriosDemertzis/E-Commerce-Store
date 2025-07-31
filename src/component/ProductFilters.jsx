@@ -1,6 +1,16 @@
+/**
+ * @fileoverview ProductFilters component providing category filtering, sorting, and view mode controls.
+ * Features responsive design with dropdown selectors and toggle buttons for enhanced user experience.
+ * Integrates with global state management for filter persistence across the application.
+ */
+
 import { useProductFilterActions } from "../context/ShopActions";
 import { useProductFilters } from "../context/ShopSelectors";
 
+/**
+ * ProductFilters component for filtering, sorting, and view mode selection
+ * @returns {JSX.Element} The filters component with category, sort, and view mode controls
+ */
 export default function ProductFilters(){
 
 const {categories,categoryFilter,searchTerm: _searchTerm,sortBy,viewMode} = useProductFilters();

@@ -1,7 +1,22 @@
-// Products data fetched from DummyJSON API
-// Total products available: 69
-// Transformed to match the required structure
+/**
+ * @fileoverview Product data for the e-commerce application
+ * Contains the complete product catalog with details like pricing, categories, ratings, and stock
+ * Data source: DummyJSON API, transformed to match application requirements
+ * Total products available: 69
+ */
 
+/**
+ * Complete product catalog array
+ * Each product contains essential e-commerce information
+ * @type {Array<Object>}
+ * @property {number} id - Unique product identifier
+ * @property {string} name - Product name/title
+ * @property {number} price - Product price in USD
+ * @property {string} category - Product category
+ * @property {string} image - Product image URL
+ * @property {number} rating - Product rating (0-5)
+ * @property {number} stock - Available stock quantity
+ */
 const PRODUCTS = [
   {
     id: 1,
@@ -626,4 +641,7 @@ const PRODUCTS = [
   }
 ];
 
+/**
+ * Export the complete product catalog for use throughout the application
+ */
 export { PRODUCTS };

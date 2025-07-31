@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Footer component providing site-wide footer with brand information, navigation links,
+ * customer service links, legal information, newsletter signup, and payment methods display.
+ * Features responsive design with organized grid layout and social media links.
+ */
+
+/**
+ * Footer component with comprehensive site information and links
+ * @returns {JSX.Element} The footer component with brand info, navigation, and contact details
+ */
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 

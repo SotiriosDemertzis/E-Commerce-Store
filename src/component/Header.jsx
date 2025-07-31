@@ -1,8 +1,18 @@
+/**
+ * @fileoverview Header component providing navigation, search functionality, and user actions.
+ * Includes responsive design with mobile/desktop layouts, debounced search, cart/wishlist access,
+ * and trust signals display. Features a modal wishlist overlay for quick access.
+ */
+
 import { useState, useEffect } from "react";
 import { useCartItemCount, useProductFilters, useWishlist } from "../context/ShopSelectors";
 import { useToggleCartSidebar, useProductFilterActions } from "../context/ShopActions";
 import WishlistPage from "./WishlistPage";
 
+/**
+ * Header component with navigation, search, and user actions
+ * @returns {JSX.Element} The header component with search bar, cart, wishlist, and trust signals
+ */
 export default function Header() {
     const cartItemCount = useCartItemCount();
     const { wishlistCount } = useWishlist();
@@ -23,10 +33,17 @@ export default function Header() {
         return () => clearTimeout(timer);
     }, [localSearchTerm, setSearchTerm]);
 
+    /**
+     * Handles search input changes and updates local search term
+     * @param {React.ChangeEvent<HTMLInputElement>} e - The input change event
+     */
     const handleSearchChange = (e) => {
         setLocalSearchTerm(e.target.value);
     };
 
+    /**
+     * Clears both local and global search terms
+     */
     const clearSearch = () => {
         setLocalSearchTerm("");
         setSearchTerm("");

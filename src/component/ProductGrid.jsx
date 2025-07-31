@@ -1,8 +1,18 @@
+/**
+ * @fileoverview ProductGrid component displaying filtered products in grid or list view.
+ * Handles loading states, error states, empty states, and provides welcome screen for initial state.
+ * Supports both grid and list view modes with loading simulation and error handling.
+ */
+
 import { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import { LoadingGrid, LoadingList, EmptyState, NetworkErrorState } from './LoadingStates';
 import { useFilteredProducts, useViewMode, useProductFilters } from '../context';
 
+/**
+ * ProductGrid component for displaying products with various states and layouts
+ * @returns {JSX.Element} The product grid with loading, error, empty, and content states
+ */
 export default function ProductGrid() {
   const filteredProducts = useFilteredProducts();
   const viewMode = useViewMode();
@@ -30,6 +40,9 @@ export default function ProductGrid() {
     }
   }, [currentSearchTerm, currentCategoryFilter, hasSearched]);
 
+  /**
+   * Handles retry action for error states by clearing error and simulating reload
+   */
   const handleRetry = () => {
     setError(null);
     setIsLoading(true);

@@ -10,6 +10,11 @@ import { ShopProvider } from './context'
 import { useProductModal } from './context/ShopSelectors'
 import { useProductModal as useProductModalActions } from './context/ShopActions'
 
+/**
+ * Main content component that renders the core e-commerce layout
+ * Handles product modal state and provides the main application structure
+ * @returns {JSX.Element} The main application content layout
+ */
 function AppContent() {
   const { selectedProduct, isProductModalOpen } = useProductModal();
   const { closeProductModal } = useProductModalActions();
@@ -56,6 +61,11 @@ function AppContent() {
   );
 }
 
+/**
+ * Root application component with comprehensive error boundaries and context providers
+ * Sets up the application architecture with nested providers for state management and notifications
+ * @returns {JSX.Element} The complete application with all providers and error boundaries
+ */
 function App() {
   return (
     <ErrorBoundary>

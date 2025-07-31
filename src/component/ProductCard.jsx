@@ -1,9 +1,29 @@
+/**
+ * @fileoverview ProductCard component for displaying individual products
+ * Supports both grid and list view modes with responsive design
+ * Includes wishlist, cart, and product modal functionality
+ */
+
 import { useState } from 'react';
 import { useCart, useAddToCart, useViewMode } from '../context';
 import { useProductModal, useWishlistActions } from '../context/ShopActions';
 import { useWishlist } from '../context/ShopSelectors';
 import { useToast } from '../hooks/useToast';
 
+/**
+ * ProductCard component that displays a single product with interactive features
+ * Adapts its layout based on the current view mode (grid/list)
+ * @param {Object} props - Component props
+ * @param {Object} props.product - Product object to display
+ * @param {number} props.product.id - Unique product identifier
+ * @param {string} props.product.name - Product name
+ * @param {string} props.product.image - Product image URL
+ * @param {number} props.product.price - Product price
+ * @param {string} props.product.category - Product category
+ * @param {number} props.product.rating - Product rating (0-5)
+ * @param {number} props.product.stock - Available stock quantity
+ * @returns {JSX.Element} ProductCard component
+ */
 export default function ProductCard({ product }) {
   const cart = useCart();
   const addToCart = useAddToCart();
@@ -41,7 +61,12 @@ export default function ProductCard({ product }) {
     openProductModal(product);
   };
 
-  // Helper function to get star rating display
+  /**
+   * Helper function to render star rating display
+   * Creates filled, half-filled, and empty stars based on rating value
+   * @param {number} rating - Rating value (0-5, can include decimals)
+   * @returns {JSX.Element[]} Array of star SVG elements
+   */
   const getStarRating = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);

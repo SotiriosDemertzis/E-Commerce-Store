@@ -1,9 +1,23 @@
+/**
+ * @fileoverview ProductModal component providing detailed product view in an overlay modal.
+ * Features image gallery, product details, star ratings, cart/wishlist actions, and keyboard navigation.
+ * Includes responsive design with image thumbnails and comprehensive product information display.
+ */
+
 import { useState, useEffect } from 'react';
 import { useCart, useAddToCart } from '../context';
 import { useWishlistActions } from '../context/ShopActions';
 import { useWishlist } from '../context/ShopSelectors';
 import { useToast } from '../hooks/useToast';
 
+/**
+ * ProductModal component for displaying detailed product information in a modal
+ * @param {Object} props - The component props
+ * @param {Object} props.product - The product object to display
+ * @param {boolean} props.isOpen - Whether the modal is open
+ * @param {Function} props.onClose - Function to close the modal
+ * @returns {JSX.Element|null} The product modal with detailed information, or null if closed
+ */
 export default function ProductModal({ product, isOpen, onClose }) {
   const cart = useCart();
   const addToCart = useAddToCart();
@@ -17,6 +31,9 @@ export default function ProductModal({ product, isOpen, onClose }) {
   const inCart = !!cartItem;
   const isInWishlist = wishlist.some(item => item.id === product?.id);
 
+  /**
+   * Toggles product wishlist status and shows appropriate toast notification
+   */
   const handleWishlistToggle = () => {
     if (isInWishlist) {
       removeFromWishlist(product.id);
@@ -27,6 +44,9 @@ export default function ProductModal({ product, isOpen, onClose }) {
     }
   };
 
+  /**
+   * Adds product to cart and shows confirmation toast
+   */
   const handleAddToCart = () => {
     addToCart(product);
     toast.cart('Added to Cart', `${product.name} has been added to your cart`);
@@ -51,7 +71,11 @@ export default function ProductModal({ product, isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
-  // Helper function to get star rating display
+  /**
+   * Generates star rating display with full, half, and empty stars
+   * @param {number} rating - The rating value (0-5)
+   * @returns {JSX.Element[]} Array of star elements
+   */
   const getStarRating = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
