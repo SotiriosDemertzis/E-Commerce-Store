@@ -51,3 +51,21 @@ export function useProductFilterActions() {
         setViewMode: (viewMode) => dispatch({ type: ACTION_TYPES.SET_VIEW_MODE, payload: viewMode })
     }), [dispatch]);
 }
+
+export function useProductModal() {
+    const dispatch = useShopDispatch();
+    
+    return useMemo(() => ({
+        openProductModal: (product) => dispatch({ type: ACTION_TYPES.OPEN_PRODUCT_MODAL, payload: product }),
+        closeProductModal: () => dispatch({ type: ACTION_TYPES.CLOSE_PRODUCT_MODAL })
+    }), [dispatch]);
+}
+
+export function useWishlistActions() {
+    const dispatch = useShopDispatch();
+    
+    return useMemo(() => ({
+        addToWishlist: (product) => dispatch({ type: ACTION_TYPES.ADD_TO_WISHLIST, payload: product }),
+        removeFromWishlist: (productId) => dispatch({ type: ACTION_TYPES.REMOVE_FROM_WISHLIST, payload: productId })
+    }), [dispatch]);
+}

@@ -26,11 +26,27 @@ export function ShopProvider({children}) {
                 console.warn('Error loading cart from localStorage:', error);
             }
         }
+
+        const savedWishlist = localStorage.getItem('shopping-wishlist');
+        if(savedWishlist) {
+            try {
+                const wishlist = JSON.parse(savedWishlist);
+                wishlist.forEach(item => {
+                    dispatch({ type: ACTION_TYPES.ADD_TO_WISHLIST, payload: item});
+                });
+            } catch (error) {
+                console.warn('Error loading wishlist from localStorage:', error);
+            }
+        }
     }, [] );
 
     useEffect( () => {
         localStorage.setItem('shopping-cart',JSON.stringify(state.cart));
     }, [state.cart]);
+
+    useEffect( () => {
+        localStorage.setItem('shopping-wishlist',JSON.stringify(state.wishlist));
+    }, [state.wishlist]);
 
     return (
     <ShopContext.Provider value={state}>

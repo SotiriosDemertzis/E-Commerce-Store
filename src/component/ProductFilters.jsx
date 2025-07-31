@@ -3,37 +3,14 @@ import { useProductFilters } from "../context/ShopSelectors";
 
 export default function ProductFilters(){
 
-
-const {categories,categoryFilter,searchTerm,sortBy,viewMode} = useProductFilters();
-const {setCategoryFilter,setSearchTerm,setSortBy,setViewMode} = useProductFilterActions();
+const {categories,categoryFilter,searchTerm: _searchTerm,sortBy,viewMode} = useProductFilters();
+const {setCategoryFilter,setSearchTerm: _setSearchTerm,setSortBy,setViewMode} = useProductFilterActions();
 
   return (
     <>
     <div className="bg-white/80 backdrop-blur-lg border border-gray-200/50 shadow-xl mb-8">
       <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Search */}
-          <div className="space-y-2">
-            <label className="flex items-center space-x-2 text-sm font-semibold text-slate-700">
-              <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <span>Search Products</span>
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search for products..."
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 pl-10 bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md"
-              />
-              <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Category Filter */}
           <div className="space-y-2">
             <label className="flex items-center space-x-2 text-sm font-semibold text-slate-700">
@@ -47,9 +24,9 @@ const {setCategoryFilter,setSearchTerm,setSortBy,setViewMode} = useProductFilter
               onChange={(e) => setCategoryFilter(e.target.value)}
               className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md appearance-none cursor-pointer"
             >
-              <option value="" disabled>Select a category...</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
+              <option value="">All Categories</option>
+              {categories.filter(cat => cat !== 'all').map(category => (
+                <option key={category} value={category} className="capitalize">{category.replace('-', ' ')}</option>
               ))}
             </select>
           </div>
@@ -67,7 +44,8 @@ const {setCategoryFilter,setSearchTerm,setSortBy,setViewMode} = useProductFilter
               onChange={(e) => setSortBy(e.target.value)}
               className="w-full border border-gray-300 rounded-xl px-4 py-3 bg-white/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md appearance-none cursor-pointer"
             >
-              <option value="name">Name</option>
+              <option value="name">Name A-Z</option>
+              <option value="name-desc">Name Z-A</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
               <option value="rating-desc">Rating: High to Low</option>

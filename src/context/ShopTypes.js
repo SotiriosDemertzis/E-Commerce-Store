@@ -16,7 +16,13 @@ export const ACTION_TYPES = {
   
   // UI actions
   TOGGLE_CART_SIDEBAR: 'TOGGLE_CART_SIDEBAR',
-  SET_VIEW_MODE: 'SET_VIEW_MODE'
+  SET_VIEW_MODE: 'SET_VIEW_MODE',
+  OPEN_PRODUCT_MODAL: 'OPEN_PRODUCT_MODAL',
+  CLOSE_PRODUCT_MODAL: 'CLOSE_PRODUCT_MODAL',
+  
+  // Wishlist actions
+  ADD_TO_WISHLIST: 'ADD_TO_WISHLIST',
+  REMOVE_FROM_WISHLIST: 'REMOVE_FROM_WISHLIST'
 };
 
 // Categories are dynamically computed based on products
@@ -44,5 +50,10 @@ export const initialState = {
   
   // UI state
   isCartOpen: false,
-  viewMode: 'grid' // 'grid' or 'list'
+  viewMode: 'grid', // 'grid' or 'list'
+  selectedProduct: null,
+  isProductModalOpen: false,
+  
+  // Wishlist state
+  wishlist: []
 };

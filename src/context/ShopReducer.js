@@ -58,7 +58,36 @@ export function ShopReducer(state,action) {
         case ACTION_TYPES.TOGGLE_CART_SIDEBAR:
             return { ...state, isCartOpen: !state.isCartOpen};
         case ACTION_TYPES.SET_VIEW_MODE:
-            return { ...state, viewMode: action.payload}; 
+            return { ...state, viewMode: action.payload};
+        case ACTION_TYPES.OPEN_PRODUCT_MODAL:
+            return { 
+                ...state, 
+                selectedProduct: action.payload, 
+                isProductModalOpen: true 
+            };
+        case ACTION_TYPES.CLOSE_PRODUCT_MODAL:
+            return { 
+                ...state, 
+                selectedProduct: null, 
+                isProductModalOpen: false 
+            };
+        case ACTION_TYPES.ADD_TO_WISHLIST: {
+            const existingItem = state.wishlist.find(item => item.id === action.payload.id);
+            
+            if(existingItem){
+                return state; // Item already in wishlist
+            } else {
+                return {
+                    ...state,
+                    wishlist: [...state.wishlist, action.payload]
+                };
+            }
+        }
+        case ACTION_TYPES.REMOVE_FROM_WISHLIST:
+            return {
+                ...state,
+                wishlist: state.wishlist.filter(item => item.id !== action.payload)
+            };
 
         default:
             throw new Error(`Unknown action type: ${action.type}`);

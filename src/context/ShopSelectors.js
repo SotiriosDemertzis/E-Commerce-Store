@@ -55,6 +55,8 @@ export function useFilteredProducts(){
         }).sort((a, b) => {
             if (sortBy === 'name') {
                 return a.name.localeCompare(b.name);
+            } else if (sortBy === 'name-desc') {
+                return b.name.localeCompare(a.name);
             } else if (sortBy === 'price-low') {
                 return a.price - b.price;
             } else if (sortBy === 'price-high') {
@@ -97,4 +99,22 @@ export function useProductFilters() {
     viewMode: shop.viewMode,
     filteredProducts
   }), [categories, shop.categoryFilter, shop.searchTerm, shop.sortBy, shop.viewMode, filteredProducts]);
+}
+
+export function useProductModal() {
+  const shop = useShop();
+  
+  return useMemo(() => ({
+    selectedProduct: shop.selectedProduct,
+    isProductModalOpen: shop.isProductModalOpen
+  }), [shop.selectedProduct, shop.isProductModalOpen]);
+}
+
+export function useWishlist() {
+  const shop = useShop();
+  
+  return useMemo(() => ({
+    wishlist: shop.wishlist,
+    wishlistCount: shop.wishlist.length
+  }), [shop.wishlist]);
 }

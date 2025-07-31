@@ -1,9 +1,13 @@
-import ProductCard from './ProductCard'
-import { useFilteredProducts, useViewMode, useProductFilters } from '../context'
+import { useState, useEffect } from 'react';
+import ProductCard from './ProductCard';
+import { LoadingGrid, LoadingList, EmptyState, NetworkErrorState } from './LoadingStates';
+import { useFilteredProducts, useViewMode, useProductFilters } from '../context';
 
 export default function ProductGrid() {
   const filteredProducts = useFilteredProducts();
   const viewMode = useViewMode();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
     
   // Check if this is the initial state (no search/filter applied)
   const { searchTerm: currentSearchTerm, categoryFilter: currentCategoryFilter } = useProductFilters();
@@ -11,6 +15,39 @@ export default function ProductGrid() {
   
   // Show welcome screen only if user hasn't searched AND no category is selected
   const isInitialState = !hasSearched && !currentCategoryFilter;
+
+  // Simulate loading state when filters change
+  useEffect(() => {
+    if (hasSearched || currentCategoryFilter) {
+      setIsLoading(true);
+      setError(null);
+      
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 500); // Simulate API call delay
+      
+      return () => clearTimeout(timer);
+    }
+  }, [currentSearchTerm, currentCategoryFilter, hasSearched]);
+
+  const handleRetry = () => {
+    setError(null);
+    setIsLoading(true);
+    
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  // Show loading state
+  if (isLoading) {
+    return viewMode === 'grid' ? <LoadingGrid count={8} /> : <LoadingList count={6} />;
+  }
+
+  // Show error state
+  if (error) {
+    return <NetworkErrorState onRetry={handleRetry} />;
+  }
   
   if (filteredProducts.length === 0) {
     if (isInitialState) {
